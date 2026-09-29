@@ -1,0 +1,18 @@
+# build output
+bar
+bar-tsan
+*.exe
+*.o
+*.dSYM/
+
+# unit-test / unit-coverage build artifacts (make unit-test, make unit-coverage)
+unit_test
+unit_test_cov
+*.gcda
+*.gcno
+*.gcov
+
+# editors
+.vscode/
+.idea/
+*.swp

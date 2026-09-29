@@ -1,0 +1,42 @@
+name: Lab 2 core checks
+
+# The same checks as `make test`, on every push. Green here is not full marks:
+# most of this lab's marks are for the reasoning in RESULTS.md and for the oral
+# test, neither of which a script can see.
+
+on:
+  push:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compiler version
+        run: gcc --version
+
+      - name: Cores on this runner
+        run: nproc
+
+      - name: Build
+        run: make
+
+      - name: src/given.c is unmodified
+        run: bash tests/run_tests.sh given
+
+      - name: The fix is correct
+        run: bash tests/run_tests.sh fixed
+
+      - name: The alternative behaves as the brief says
+        run: bash tests/run_tests.sh alt
+
+      - name: The measurement
+        run: bash tests/run_tests.sh speed
+
+      - name: PREDICTION.md and RESULTS.md
+        run: bash tests/run_tests.sh report

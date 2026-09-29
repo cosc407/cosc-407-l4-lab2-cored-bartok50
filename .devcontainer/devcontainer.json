@@ -1,0 +1,31 @@
+{
+  "name": "COSC 407/507 lab",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  // Ask Codespaces for a 4-core machine. The default is 2, which is enough to
+  // see a data race but not enough to say anything useful about scaling.
+  // 4 cores costs 4 core-hours per wall-clock hour against the 180 core-hours
+  // a verified student gets each month, so a 2-hour lab costs 8.
+  "hostRequirements": {
+    "cpus": 4
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.makefile-tools"
+      ],
+      "settings": {
+        "files.eol": "\n",
+        "C_Cpp.default.cStandard": "gnu11"
+      }
+    }
+  },
+
+  // Printed once, when the container is first created, so the first thing you
+  // see is whether the toolchain works and how many cores you have.
+  "postCreateCommand": "gcc --version | head -1 && echo \"cores: $(nproc)\" && lstopo-no-graphics --only core 2>/dev/null | wc -l | xargs -I{} echo 'physical cores: {}'"
+}

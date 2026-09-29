@@ -1,0 +1,11 @@
+# Keep LF in the repository AND in the working tree for everything the Linux
+# autograder runs. A CRLF Makefile or shell script fails on Linux with errors
+# that look nothing like the real cause ("/usr/bin/bash^M: bad interpreter",
+# "missing separator"), so this is not cosmetic.
+*           text=auto eol=lf
+Makefile    text eol=lf
+*.sh        text eol=lf
+*.c         text eol=lf
+*.h         text eol=lf
+*.yml       text eol=lf
+*.md        text eol=lf
